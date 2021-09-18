@@ -1,0 +1,38 @@
+.menu_main {
+    --width: 80%;
+}
+
+ion-toolbar{
+    --background: transparent;
+}
+
+// ion-menu > ion-header{
+//     height: 9%;
+// }
+
+.menu_figure{
+    width: 50%;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+ion-menu > .header-md:after{
+    background-color: var(--ion-color-primary);
+}
+
+.header_main:after{
+    width: 0%;
+}
+
+ion-item{
+    --inner-border-width: 0;
+}
+
+ion-icon{
+    color: var(--ion-color-primary);
+    margin-right: 5%;
+}
+
+.list-md{
+    margin-top: 10%;
+}

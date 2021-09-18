@@ -1,0 +1,36 @@
+<ion-content class="section_login">
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-img src="../../assets/images/logo.png"></ion-img>            
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+                <ion-item>
+                    <ion-icon src="../../assets/images/icon_user.svg"></ion-icon><ion-input type="text"  placeholder="Documento de Identidad" formControlName="document_indenty"></ion-input>
+                </ion-item>
+                <div class="validation-error">
+                    <ng-container *ngFor="let validation of validation_message.document_indenty">
+                        <div *ngIf="loginForm.get('document_indenty').hasError(validation.type) && loginForm.get('document_indenty').dirty">
+                            {{validation.message}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-item>
+                    <ion-icon src="../../assets/images/icon_password.svg"></ion-icon><ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
+                </ion-item>
+                <div class="validation-error">
+                    <ng-container *ngFor="let validation of validation_message.password">
+                        <div *ngIf="loginForm.get('password').hasError(validation.type) && loginForm.get('password').dirty">
+                            {{validation.message}}
+                        </div>
+                    </ng-container>
+                </div>
+                <ion-item class="item_toggle">
+                    <ion-label>Recuerda mi usuario</ion-label>
+                    <ion-toggle slot="start" name="recuerda" color="primary"></ion-toggle>
+                </ion-item>
+                <ion-button expand="full" shape="round" type="submit">Iniciar Sesión</ion-button>
+            </form>
+        </ion-row>        
+    </ion-grid>
+</ion-content>
