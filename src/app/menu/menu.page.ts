@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Menu } from '../interface/menu';
 import { MenuServiceService } from '../service/menu-service.service';
@@ -11,8 +12,17 @@ import { MenuServiceService } from '../service/menu-service.service';
 export class MenuPage implements OnInit {
 
   listMenu:Array<Menu>=[];
+  selectedPath:string='';
   constructor(private menu: MenuController,
-              private menuService: MenuServiceService) { }
+              private menuService: MenuServiceService,
+              private router: Router) { 
+                this.router.events.subscribe((event:RouterEvent)=>{
+                  if(event.url !== undefined){
+                    this.selectedPath = event.url;
+                  }                  
+                }                
+                );
+              }
 
   ngOnInit() {
     this.showMenu();

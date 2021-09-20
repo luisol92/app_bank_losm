@@ -1,0 +1,11 @@
+<ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="col_footer" *ngFor="let infoMenu of listMenu">
+        <ion-img class="footer_img" src="{{infoMenu.icon_gray}}" [routerLink]="[infoMenu.path]" *ngIf="selectedPath !== infoMenu.path"></ion-img>
+        <ion-img class="footer_img" src="{{infoMenu.icon}}" [routerLink]="[infoMenu.path]" *ngIf="selectedPath === infoMenu.path"></ion-img>
+        <ion-label class="footer_text">{{infoMenu.nombre}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>

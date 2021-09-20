@@ -53,6 +53,10 @@ const routes: Routes = [
     loadChildren: () => import('./sucursales/sucursales.module').then( m => m.SucursalesPageModule),
     canActivate: [MenuGuardsService]
   },
+  {
+    path: 'footer-menu',
+    loadChildren: () => import('./footer-menu/footer-menu.module').then( m => m.FooterMenuPageModule)
+  },
 ];
 
 @NgModule({

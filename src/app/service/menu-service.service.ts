@@ -17,7 +17,8 @@ export class MenuServiceService {
         path: "login",
         pathConfigu : "login",
         indMenu: true,
-        indOption : false
+        indOption : false,
+        indOptionHor : false
       },
       {
         nombre: "Mis productos",
@@ -25,14 +26,17 @@ export class MenuServiceService {
         pathConfigu : "producs",
         indMenu: true,
         indOption : true,
-        icon:'../../assets/images/icon_my_products_green.svg'  
+        icon:'../../assets/images/icon_my_products_green.svg',
+        indOptionHor : true,
+        icon_gray : '../../assets/images/icon_account_gray.svg'
       },
       {
         nombre: "Detalle de Producto",
         path: "producs/",
         pathConfigu : "producs/:id/:type",
         indMenu: false,
-        indOption : false   
+        indOption : false,
+        indOptionHor : false
       },
       {
         nombre: "Transacciones",
@@ -40,7 +44,9 @@ export class MenuServiceService {
         pathConfigu : "transaction",
         indMenu: true,
         indOption : true,
-        icon:'../../assets/images/icon_transactions_green.svg'  
+        icon:'../../assets/images/icon_transactions_green.svg',
+        indOptionHor : true,
+        icon_gray : '../../assets/images/icon_transactions_gray.svg'
       },
       {
         nombre: "Ofertas",
@@ -48,7 +54,9 @@ export class MenuServiceService {
         pathConfigu : "ofertas",
         indMenu: true,
         indOption : true,
-        icon:'../../assets/images/icon_offers_green.svg'  
+        icon:'../../assets/images/icon_offers_green.svg',
+        indOptionHor : true,
+        icon_gray : '../../assets/images/icon_offers_gray.svg'
       },
       {
         nombre: "Configuración",
@@ -56,7 +64,9 @@ export class MenuServiceService {
         pathConfigu : "configuration",
         indMenu: true,
         indOption : true,
-        icon:'../../assets/images/settings-outline.svg'  
+        icon:'../../assets/images/icon_config_green.svg',
+        indOptionHor : true,
+        icon_gray : '../../assets/images/icon_config_gray.svg'
       },
       {
         nombre: "Contacto",
@@ -64,7 +74,8 @@ export class MenuServiceService {
         pathConfigu : "contacto",
         indMenu: false,
         indOption : true,
-        icon:'../../assets/images/icon_contact.svg'  
+        icon:'../../assets/images/icon_contact.svg',
+        indOptionHor : false 
       },
       {
         nombre: "Sucursales",
@@ -72,7 +83,8 @@ export class MenuServiceService {
         pathConfigu : "sucursales",
         indMenu: false,
         indOption : true,
-        icon:'../../assets/images/location-outline.svg'  
+        icon:'../../assets/images/location-outline.svg',
+        indOptionHor : false
       }                               
     ];
   }

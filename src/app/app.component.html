@@ -1,4 +1,7 @@
 <ion-app>
   <app-menu *ngIf="indValidateMenu"></app-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
+  <ion-footer *ngIf="indValidateMenu">
+    <app-footer-menu></app-footer-menu>
+  </ion-footer>
 </ion-app>

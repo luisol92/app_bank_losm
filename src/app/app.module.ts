@@ -13,9 +13,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AutInterceptor } from './auth.interceptor';
 import { PipeModule } from './pipe/pipe.module';
 import { MenuGuardsService } from './service/menu-guards.service';
+import { FooterMenuPage } from './footer-menu/footer-menu.page';
 
 @NgModule({
-  declarations: [AppComponent,MenuPage],
+  declarations: [AppComponent,MenuPage, FooterMenuPage],
   entryComponents: [],
   imports: [BrowserModule, 
             IonicModule.forRoot(), 
@@ -31,6 +32,6 @@ import { MenuGuardsService } from './service/menu-guards.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: AutInterceptor,multi:true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
