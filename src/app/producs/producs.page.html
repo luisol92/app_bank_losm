@@ -1,9 +1,79 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>producs</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title [class]="class">{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content >
+  <ion-grid>
+      <ion-row>
+        <ion-card-title color="primary" *ngIf="id === 1">Cuentas({{listAccounts.length}})</ion-card-title>
+        <ion-card *ngFor="let accounts of listAccounts" class="card_cuentas">
+          <ion-card-content (click)="getDetailProduct(accounts)">
+            <ion-grid>
+              <ion-row>           
+                <ion-img src="../../assets/images/icon_account_gray.svg"></ion-img>
+                <ion-text>{{accounts.alias}} - {{accounts.number|lengthPipe:'4'}}</ion-text>
+              </ion-row>
+              <ion-row>
+                <ion-text>RD {{accounts.availableAmount|currency}}</ion-text>
+              </ion-row>
+              <ion-row>           
+                <ion-text class="tex_min">Balance disponible</ion-text>
+              </ion-row>                         
+            </ion-grid>  
+          </ion-card-content>
+        </ion-card>         
+      </ion-row>      
+      <ion-row>
+        <ion-card-title color="secondary" *ngIf="id === 1">Tarjetas({{listCards.length}})</ion-card-title>
+        <ion-card *ngFor="let cards of listCards" class="card_tarjetas">
+          <ion-card-content (click)="getDetailProduct(cards)">
+            <ion-grid>
+              <ion-row>           
+                <ion-img src="../../assets/images/icon_credit_card_gray.svg"></ion-img>
+                <ion-text>{{cards.alias}} - {{cards.number|lengthPipe:'4'}}</ion-text>
+              </ion-row>
+              <ion-row>
+                <ion-text>RD {{cards.availableAmountRD|currency}}</ion-text>
+              </ion-row>
+              <ion-row *ngIf="cards.availableAmountUS > 0">
+                <ion-text>US {{cards.availableAmountUS|currency}}</ion-text>
+              </ion-row>              
+              <ion-row>           
+                <ion-text class="tex_min">Balance disponible</ion-text>
+              </ion-row>                         
+            </ion-grid>  
+          </ion-card-content>
+        </ion-card>         
+      </ion-row>     
+  </ion-grid>
 </ion-content>
+
+<ion-footer *ngIf="id === 1">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col class="col_footer">
+          <ion-img class="footer_img" src="../../assets/images/icon_account_gray.svg"></ion-img>
+          <ion-label class="footer_text">Mis Productos</ion-label>
+        </ion-col>
+        <ion-col class="col_footer">
+          <ion-img class="footer_img" src="../../assets/images/icon_transactions_gray.svg"></ion-img>
+          <ion-label class="footer_text">Transacciones</ion-label>
+        </ion-col>
+        <ion-col class="col_footer">
+          <ion-img class="footer_img" src="../../assets/images/icon_offers_gray.svg"></ion-img>
+          <ion-label class="footer_text">Ofertas</ion-label>
+        </ion-col>
+        <ion-col class="col_footer">
+          <ion-img class="footer_img" src="../../assets/images/icon_config_gray.svg"></ion-img>
+          <ion-label class="footer_text">Configuración</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

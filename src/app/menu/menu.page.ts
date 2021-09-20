@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { Menu } from '../interface/menu';
+import { MenuServiceService } from '../service/menu-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,12 +10,15 @@ import { MenuController } from '@ionic/angular';
 })
 export class MenuPage implements OnInit {
 
-  constructor(private menu: MenuController) { }
+  listMenu:Array<Menu>=[];
+  constructor(private menu: MenuController,
+              private menuService: MenuServiceService) { }
 
   ngOnInit() {
+    this.showMenu();
   }
+
   openFirst() {
-    console.log("Hola Luuuuchgo");
     this.menu.enable(true, 'first');
     this.menu.open('first');
   }
@@ -31,4 +36,7 @@ export class MenuPage implements OnInit {
     this.menu.open('custom');
   }  
 
+  showMenu(){
+    this.listMenu=this.menuService.getMenu().filter(info => info.indOption === true);
+  }
 }

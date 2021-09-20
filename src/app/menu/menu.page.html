@@ -4,10 +4,7 @@
       <ion-menu-button>
         <ion-img src="../../assets/images/icon_menu.svg"></ion-img>  
       </ion-menu-button>
-    </ion-buttons>     
-    <!-- <ion-title>
-      Ionic Blank
-    </ion-title> -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-menu side="start" menuId="custom" contentId="main" class="menu_main">
@@ -18,12 +15,7 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item><ion-icon src="../../assets/images/icon_my_products_green.svg"></ion-icon>Mis productos</ion-item>
-      <ion-item><ion-icon src="../../assets/images/icon_transactions_green.svg"></ion-icon>Transacciones</ion-item>
-      <ion-item><ion-icon src="../../assets/images/icon_offers_green.svg"></ion-icon>Ofertas</ion-item>
-      <ion-item><ion-icon src="../../assets/images/settings-outline.svg"></ion-icon>Configuración</ion-item>
-      <ion-item><ion-icon src="../../assets/images/icon_contact.svg"></ion-icon>Contacto</ion-item> 
-      <ion-item><ion-icon src="../../assets/images/location-outline.svg"></ion-icon>Sursales</ion-item>
+      <ion-item *ngFor="let infoMenu of listMenu" [routerLink]="[infoMenu.path]"><ion-icon src="{{infoMenu.icon}}"></ion-icon>{{infoMenu.nombre}}</ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

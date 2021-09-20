@@ -4,13 +4,13 @@
             <ion-img src="../../assets/images/logo.png"></ion-img>            
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
                 <ion-item>
-                    <ion-icon src="../../assets/images/icon_user.svg"></ion-icon><ion-input type="text"  placeholder="Documento de Identidad" formControlName="document_indenty"></ion-input>
+                    <ion-icon src="../../assets/images/icon_user.svg"></ion-icon><ion-input type="text"  placeholder="Documento de Identidad" formControlName="userId"></ion-input>
                 </ion-item>
                 <div class="validation-error">
-                    <ng-container *ngFor="let validation of validation_message.document_indenty">
-                        <div *ngIf="loginForm.get('document_indenty').hasError(validation.type) && loginForm.get('document_indenty').dirty">
+                    <ng-container *ngFor="let validation of validation_message.userId">
+                        <div *ngIf="loginForm.get('userId').hasError(validation.type) && loginForm.get('userId').dirty">
                             {{validation.message}}
                         </div>
                     </ng-container>

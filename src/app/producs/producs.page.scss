@@ -1,0 +1,38 @@
+ion-content{
+    --background: whitesmoke;
+}
+
+ion-card{
+    border-radius: 0px;
+    border-left-style: solid;
+    border-left-width: 7px;
+    padding-right: 12px;
+    width: 100%;
+    --background: white;  
+}
+
+ion-card-title{
+    width: 100%;
+}
+
+ion-img{
+    width: 15%;
+}
+
+.card_cuentas{
+    border-left-color: var(--ion-color-primary);
+}
+
+.card_tarjetas{
+    border-left-color: var(--ion-color-secondary);
+}
+
+.footer_img{
+    width: 40%;
+    margin-left: 28%;
+}
+
+.col_footer{
+    text-align: center;
+    --width: 25%;
+}
