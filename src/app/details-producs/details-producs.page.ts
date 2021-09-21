@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Accounts } from '../interface/accounts';
 import { Cards } from '../interface/cards';
 import { ProductsService } from '../service/products.service';
@@ -16,20 +16,51 @@ export class DetailsProducsPage implements OnInit {
   title = 'Detalle de Producto';
   id=0;//Funcionalidad de Productos
   class = 'title_page_back';
-  constructor(private product: ProductsService) { }
+  objAccounts:Accounts;
+  objCards:Cards;
+  indType:string = '';
+  constructor(private router: ActivatedRoute) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.listAccounts = [];
     this.listCards = [];
+    this.indType='';
+
+    await this.router.params.subscribe(params =>{
+      this.indType = params.type;
+    });
+
+    await this.router.queryParams.subscribe((queryParams):any =>{
+
+      if(this.indType === 'AC'){
+        this.objAccounts={
+          alias : queryParams.alias,
+          availableAmount : queryParams.availableAmount,
+          number : queryParams.number,
+          productType : queryParams.productType
+        }
+      }
+      if(this.indType === 'TC'){
+        this.objCards = {
+          alias : queryParams.alias,
+          availableAmountRD : queryParams.availableAmountRD,
+          availableAmountUS : queryParams.availableAmountUS,
+          isInternational : queryParams.isInternational,
+          number : queryParams.number,
+          productType : queryParams.productType
+        }
+      }      
+    });
+    
     this.getDetailProducts();
   }
 
   getDetailProducts(){
-    if(this.product.listAccounts !== undefined){
-      this.listAccounts.push(this.product.listAccounts);
+    if(this.objAccounts !== undefined){
+      this.listAccounts.push(this.objAccounts);
     }
-    if(this.product.listCards !== undefined){
-      this.listCards.push(this.product.listCards);
+    if(this.objCards !== undefined){
+      this.listCards.push(this.objCards);
     }
   }
 }

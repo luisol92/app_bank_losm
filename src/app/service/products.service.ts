@@ -8,8 +8,7 @@ import { Cards } from '../interface/cards';
   providedIn: 'root'
 })
 export class ProductsService {
-  listAccounts:Accounts;
-  listCards:Cards;
+
   constructor(private http: HttpClient) { }
 
   getAccounts(){
@@ -20,8 +19,4 @@ export class ProductsService {
     return this.http.get(`${environment.urlApi}/products/credit_cards`);
   }
     
-  resStart(){
-    delete this.listAccounts;
-    delete this.listCards;
-  }
 }

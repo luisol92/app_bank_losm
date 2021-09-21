@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { Menu } from '../interface/menu';
+import { User } from '../interface/user';
+import { AuthenticateService } from '../service/authenticate.service';
 import { MenuServiceService } from '../service/menu-service.service';
 
 @Component({
@@ -12,41 +14,53 @@ import { MenuServiceService } from '../service/menu-service.service';
 export class MenuPage implements OnInit {
 
   listMenu:Array<Menu>=[];
-  selectedPath:string='';
+  token:string;
+  infoUser:User;
+  
+
   constructor(private menu: MenuController,
               private menuService: MenuServiceService,
-              private router: Router) { 
-                this.router.events.subscribe((event:RouterEvent)=>{
-                  if(event.url !== undefined){
-                    this.selectedPath = event.url;
-                  }                  
-                }                
-                );
-              }
+              private auth : AuthenticateService) {}
 
   ngOnInit() {
-    this.showMenu();
-  }
 
-  openFirst() {
-    this.menu.enable(true, 'first');
-    this.menu.open('first');
+    this.auth.getStartSession().subscribe(res =>{
+      this.showMenu();
+    });
+
+    this.auth.closeSession().subscribe(res =>{
+      this.showMenu();
+    });
+
+    this.closeMenu();
   }
 
   async openMenu() {
     await this.menu.open();
   }
 
-  openEnd() {
-    this.menu.open('end');
-  }
-
-  openCustom() {
-    this.menu.enable(true, 'custom');
-    this.menu.open('custom');
-  }  
-
   showMenu(){
-    this.listMenu=this.menuService.getMenu().filter(info => info.indOption === true);
+    this.token = localStorage.getItem('token');
+    if(this.token){
+      this.infoUser={
+        name: localStorage.getItem('name'),
+        lastName : localStorage.getItem('lastname'),
+        photo: localStorage.getItem('photo')
+      }
+      this.listMenu=this.menuService.getMenu().filter(info => info.indOption === true);
+    }else{
+      this.listMenu=this.menuService.getMenu().filter(info => info.indOption === true && info.indToken === false);
+    }
+    
   }
+
+  logout(){ 
+    this.closeMenu();  
+    this.auth.logout();
+  }
+  
+  async closeMenu() {
+    await this.menu.close();
+  }
+
 }

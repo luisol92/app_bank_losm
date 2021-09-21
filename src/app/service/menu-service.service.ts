@@ -18,7 +18,8 @@ export class MenuServiceService {
         pathConfigu : "login",
         indMenu: true,
         indOption : false,
-        indOptionHor : false
+        indOptionHor : false,
+        indToken: false
       },
       {
         nombre: "Mis productos",
@@ -28,7 +29,8 @@ export class MenuServiceService {
         indOption : true,
         icon:'../../assets/images/icon_my_products_green.svg',
         indOptionHor : true,
-        icon_gray : '../../assets/images/icon_account_gray.svg'
+        icon_gray : '../../assets/images/icon_account_gray.svg',
+        indToken: true
       },
       {
         nombre: "Detalle de Producto",
@@ -36,7 +38,8 @@ export class MenuServiceService {
         pathConfigu : "producs/:id/:type",
         indMenu: false,
         indOption : false,
-        indOptionHor : false
+        indOptionHor : false,
+        indToken: true
       },
       {
         nombre: "Transacciones",
@@ -46,7 +49,8 @@ export class MenuServiceService {
         indOption : true,
         icon:'../../assets/images/icon_transactions_green.svg',
         indOptionHor : true,
-        icon_gray : '../../assets/images/icon_transactions_gray.svg'
+        icon_gray : '../../assets/images/icon_transactions_gray.svg',
+        indToken: true
       },
       {
         nombre: "Ofertas",
@@ -56,7 +60,8 @@ export class MenuServiceService {
         indOption : true,
         icon:'../../assets/images/icon_offers_green.svg',
         indOptionHor : true,
-        icon_gray : '../../assets/images/icon_offers_gray.svg'
+        icon_gray : '../../assets/images/icon_offers_gray.svg',
+        indToken: true
       },
       {
         nombre: "Configuración",
@@ -66,7 +71,8 @@ export class MenuServiceService {
         indOption : true,
         icon:'../../assets/images/icon_config_green.svg',
         indOptionHor : true,
-        icon_gray : '../../assets/images/icon_config_gray.svg'
+        icon_gray : '../../assets/images/icon_config_gray.svg',
+        indToken: true
       },
       {
         nombre: "Contacto",
@@ -75,7 +81,8 @@ export class MenuServiceService {
         indMenu: false,
         indOption : true,
         icon:'../../assets/images/icon_contact.svg',
-        indOptionHor : false 
+        indOptionHor : false ,
+        indToken: false
       },
       {
         nombre: "Sucursales",
@@ -84,7 +91,8 @@ export class MenuServiceService {
         indMenu: false,
         indOption : true,
         icon:'../../assets/images/location-outline.svg',
-        indOptionHor : false
+        indOptionHor : false,
+        indToken: false
       }                               
     ];
   }

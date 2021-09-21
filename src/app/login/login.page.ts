@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { User } from '../interface/user';
 import { UserRequest } from '../interface/user-request';
+import { AlertService } from '../service/alert.service';
 import { AuthenticateService } from '../service/authenticate.service';
 import { FormService } from '../service/form.service';
 import { LoadingService } from '../service/loading.service';
+import { SesionGuardsService } from '../service/sesion-guards.service';
 import { TokenService } from '../service/token.service';
 
 @Component({
@@ -15,6 +18,8 @@ import { TokenService } from '../service/token.service';
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
+  userAuth: Subscription;
+  getUserAuth: Subscription;
 
   validation_message = {
     userId:[
@@ -30,52 +35,77 @@ export class LoginPage implements OnInit {
               private router: Router,
               public token: TokenService,
               private loading: LoadingService,
-              private formu: FormService) {
-
-    this.loginForm = this.formBuilder.group({
-      userId: new FormControl("",Validators.compose([
-        Validators.required
-      ])),
-      password: new FormControl("",Validators.compose([
-        Validators.required
-      ])),      
-    });
-
-   }
+              private formu: FormService,
+              private alert: AlertService) {}
 
   ngOnInit() {
+    let info = this.token.showRemeberUser();
+    this.loginForm = this.formBuilder.group({
+      userId: new FormControl(info.user,Validators.compose([
+        Validators.required
+      ])),
+      password: new FormControl(info.pass,Validators.compose([
+        Validators.required
+      ])),
+      remeber: new FormControl("",Validators.compose([])),        
+    });
+    
   }
 
   login(form:FormGroup){
-
     if(this.formu.validateForm(form)){
 
       let load = this.loading.showLoader();
-      this.authService.loginUser({userId:form.value.userId,password:form.value.password}).subscribe(
+      this.userAuth = this.authService.loginUser({userId:form.value.userId,password:form.value.password}).subscribe(
         async (res:any) =>{
-         this.loading.hideLoader(load);
+
+         //Se valida si el usuario solicitó que le recordara el usuario y la clave
+         if(form.value.remeber){
+          this.token.setRememberUser({user:form.value.userId,pass:form.value.password});
+         }else{
+          this.token.noRememberUser();
+         }
+
          this.token.saveToken(res.access_token);
+         this.authService.indLogin.next(true);
+         this.loading.hideLoader(load);         
+
+         this.loginForm.get('userId').reset();
+         this.loginForm.get('password').reset();
+         this.loginForm.get('remeber').reset();
 
          //Se obtiene la información del usuario
          load = this.loading.showLoader();
-         await this.authService.getUser().subscribe(
+         this.getUserAuth = await this.authService.getUser().subscribe(
            (res:User) =>{        
             this.loading.hideLoader(load);
-            this.authService.addUserStorage(res);
+            this.token.addUserStorage(res);
+            this.authService.indLogin.next(true);
            },
            (error : any)=>{
               this.loading.hideLoader(load);
            }
          );
+
          this.router.navigate(['/producs']);
 
         },
         (error : any)=>{
-           this.loading.hideLoader(load);
+          this.loading.hideLoader(load);
+          try {
+            this.alert.showAlert('Error',error.error.message);
+          } catch (errors) {
+            this.alert.showAlert('Error',errors);
+          }           
         }
       );
 
     }
 
+  }
+
+  ngDestroy(){
+    this.userAuth.unsubscribe();
+    this.getUserAuth.unsubscribe();
   }
 }

@@ -7,4 +7,5 @@ export interface Menu {
     indOptionHor : boolean,//True si se muestra en el meú horizontal y false si no lo debe de mostrar
     icon? : string, //Ruta del icono correspondiente
     icon_gray? :string //ruta gris
+    indToken : boolean//true indica que si requieren token , false indica que no requiere token
 }

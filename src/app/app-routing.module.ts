@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MenuGuardsService } from './service/menu-guards.service';
+import { SesionGuardsService } from './service/sesion-guards.service';
 
 const routes: Routes = [
   { path: '', 
@@ -13,17 +14,17 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'producs',
     loadChildren: () => import('./producs/producs.module').then( m => m.ProducsPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'producs/:id/:type',
     loadChildren: () => import('./details-producs/details-producs.module').then( m => m.DetailsProducsPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'menu',
@@ -32,16 +33,17 @@ const routes: Routes = [
   {
     path: 'transaction',
     loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'ofertas',
     loadChildren: () => import('./ofertas/ofertas.module').then( m => m.OfertasPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'configuration',
     loadChildren: () => import('./configuration/configuration.module').then( m => m.ConfigurationPageModule),
+    canActivate: [MenuGuardsService,SesionGuardsService]
   },
   {
     path: 'contacto',
@@ -51,7 +53,7 @@ const routes: Routes = [
   {
     path: 'sucursales',
     loadChildren: () => import('./sucursales/sucursales.module').then( m => m.SucursalesPageModule),
-    canActivate: [MenuGuardsService]
+    canActivate: [MenuGuardsService, SesionGuardsService]
   },
   {
     path: 'footer-menu',

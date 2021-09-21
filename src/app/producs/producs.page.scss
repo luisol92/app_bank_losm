@@ -1,18 +1,18 @@
-ion-content{
-    --background: whitesmoke;
-}
-
 ion-card{
     border-radius: 0px;
     border-left-style: solid;
     border-left-width: 7px;
     padding-right: 12px;
-    width: 100%;
-    --background: white;  
+    width: 80%;
+    --background: white;
+    margin-bottom: 0%;
+    margin-left: 10%;
 }
 
 ion-card-title{
     width: 100%;
+    margin-left: 10%;
+    margin-top: 2%;
 }
 
 ion-img{
@@ -35,4 +35,19 @@ ion-img{
 .col_footer{
     text-align: center;
     --width: 25%;
+}
+
+.tite_card{
+    position: relative;
+    left: 6%;
+    top: 5%;
+    padding-top: 5%;
+}
+
+.grid_row_one{
+    margin-bottom: 5%;
+}
+
+b{
+    font-size: 1.7rem;
 }

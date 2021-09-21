@@ -1,7 +1,10 @@
 <ion-app>
   <app-menu *ngIf="indValidateMenu"></app-menu>
+  <ion-buttons slot="start" *ngIf="!indValidateMenu">
+    <ion-back-button color="primary" (click)="back()"></ion-back-button>
+  </ion-buttons>
   <ion-router-outlet id="main"></ion-router-outlet>
-  <ion-footer *ngIf="indValidateMenu">
+  <ion-footer *ngIf="indOptionHori">
     <app-footer-menu></app-footer-menu>
   </ion-footer>
 </ion-app>

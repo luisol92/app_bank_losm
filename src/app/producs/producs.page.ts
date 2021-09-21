@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Accounts } from '../interface/accounts';
 import { Cards } from '../interface/cards';
 import { LoadingService } from '../service/loading.service';
@@ -17,6 +18,9 @@ export class ProducsPage implements OnInit {
   title = 'Mis Productos';
   id=1;//Funcionalidad de Productos
   class = 'title_page';
+  suscribeAccounts :Subscription;
+  suscribeCards :Subscription;
+
   constructor(private products: ProductsService, 
               private loading: LoadingService,
               private router: Router) { }
@@ -29,7 +33,7 @@ export class ProducsPage implements OnInit {
   async getAccounts(){
     
     let load = this.loading.showLoader();
-    await this.products.getAccounts().subscribe(
+    this.suscribeAccounts = await this.products.getAccounts().subscribe(
       (res:Array<Accounts>) =>{           
        this.loading.hideLoader(load);
        this.listAccounts=res;
@@ -44,7 +48,7 @@ export class ProducsPage implements OnInit {
   async getCards(){
     
     let load = this.loading.showLoader();
-    await this.products.getCards().subscribe(
+    this.suscribeCards = await this.products.getCards().subscribe(
       (res:Array<Cards>) =>{          
        this.loading.hideLoader(load);
        this.listCards=res;
@@ -56,13 +60,8 @@ export class ProducsPage implements OnInit {
 
   }
 
-  getDetailProduct(product:any){
-    this.products.resStart();
-    if(product.productType === 'AC'){
-      this.products.listAccounts = product;
-    }else{
-      this.products.listCards = product;
-    }
-    this.router.navigate(['/producs/'+product.number+'/'+product.productType]);
+  ngDestroy(){
+    this.suscribeAccounts.unsubscribe();
+    this.suscribeCards.unsubscribe();
   }
 }

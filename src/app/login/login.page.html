@@ -4,7 +4,7 @@
             <ion-img src="../../assets/images/logo.png"></ion-img>            
         </ion-row>
         <ion-row class="ion-justify-content-center">
-            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+            <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)" novalidate>
                 <ion-item>
                     <ion-icon src="../../assets/images/icon_user.svg"></ion-icon><ion-input type="text"  placeholder="Documento de Identidad" formControlName="userId"></ion-input>
                 </ion-item>
@@ -27,7 +27,7 @@
                 </div>
                 <ion-item class="item_toggle">
                     <ion-label>Recuerda mi usuario</ion-label>
-                    <ion-toggle slot="start" name="recuerda" color="primary"></ion-toggle>
+                    <ion-toggle slot="start" color="primary" formControlName="remeber" checked = "false"></ion-toggle>
                 </ion-item>
                 <ion-button expand="full" shape="round" type="submit">Iniciar Sesión</ion-button>
             </form>

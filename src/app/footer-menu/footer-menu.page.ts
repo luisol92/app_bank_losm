@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { Menu } from '../interface/menu';
+import { MenuGuardsService } from '../service/menu-guards.service';
 import { MenuServiceService } from '../service/menu-service.service';
 
 @Component({
@@ -12,17 +13,19 @@ export class FooterMenuPage implements OnInit {
   
   listMenu:Array<Menu>=[];
   selectedPath:string='';
-  constructor(private menuService: MenuServiceService,private router: Router) { 
-    this.router.events.subscribe((event:RouterEvent)=>{
-      if(event.url !== undefined){
-        this.selectedPath = event.url;
-      }                  
-    }                
-    );
-  }
+  constructor(private menuService: MenuServiceService,
+              private validateMenu : MenuGuardsService) {}
 
   ngOnInit() {
-    this.showMenu();
+
+    this.validateMenu.getValidateHoriz().subscribe(infoHori=>{
+        this.selectedPath = '/'+infoHori.path;
+        if(localStorage.getItem('token')){
+          this.showMenu();
+        }
+        
+      }
+    );
   }
 
   showMenu(){

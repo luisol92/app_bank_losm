@@ -37,3 +37,16 @@ html{
     margin-left: 9%;
 }
     
+.header-md:after{
+    background-color: var(--ion-color-primary);
+}
+
+.footer-md:before{
+    background-color: var(--ion-color-primary);
+    top: -5px;
+    height: 10px;
+}
+
+.main_content{
+    --background: whitesmoke;
+}

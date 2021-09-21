@@ -6,10 +6,6 @@ ion-toolbar{
     --background: transparent;
 }
 
-// ion-menu > ion-header{
-//     height: 9%;
-// }
-
 .menu_figure{
     width: 50%;
     margin-left: 20%;
@@ -37,6 +33,18 @@ ion-icon{
     margin-top: 10%;
 }
 
-.activate-item{
-    border-left: 8px solid var(--ion-color-primary);
+.footer-md:before{
+    top: 0px !important;
+    height: 0px  !important; 
+}
+
+ion-button{
+    --border-radius: 10px;
+    width: 80%;
+    margin-left: 9%;
+    height: 5.3rem;
+}
+
+ion-footer{
+    margin-bottom: 10%;
 }
